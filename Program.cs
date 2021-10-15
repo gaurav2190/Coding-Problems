@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Coding_Problems
 {
@@ -7,10 +8,17 @@ namespace Coding_Problems
         static void Main(string[] args)
         {
             // Create a linked using Class ListNode
-            var node2 = new ListNode(2);
+            /* var node2 = new ListNode(2);
             var node1 = new ListNode(1, node2);
 
-            SwapPairs(node1);
+            SwapPairs(node1); */
+
+            var result = SumTwoNumbers(new int[]{ 2, 7, 11, 15}, 9);
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         /// <summary>
@@ -46,7 +54,32 @@ namespace Coding_Problems
             }
 
             return head;
-    }
+        }
+
+        /// <summary>
+        /// Function to return pair of indexes of numbers that add to give target.
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static int[] SumTwoNumbers(int[] nums, int target)
+        {
+            var targetValuePair = new Dictionary<int,int>();
+            
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if(targetValuePair.ContainsKey(nums[i]))
+                {
+                    return new int[]{ targetValuePair[nums[i]], i };
+                }
+                else if(!targetValuePair.ContainsKey(target-nums[i]))
+                {
+                    targetValuePair.Add(target-nums[i], i);
+                }
+            }
+
+            return null;
+        }
     }
 
     public class ListNode 
