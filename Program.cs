@@ -7,8 +7,8 @@ namespace Coding_Problems
         static void Main(string[] args)
         {
             // Create a linked using Class ListNode
-            var node1 = new ListNode(1, node2);
             var node2 = new ListNode(2);
+            var node1 = new ListNode(1, node2);
 
             SwapPairs(node1);
         }
