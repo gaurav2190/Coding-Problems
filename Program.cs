@@ -27,9 +27,12 @@ namespace Coding_Problems
             //var result = ReverseArray(list1);            
             //Console.WriteLine(SingleNumber([2, 2, 1]))
 
+
+            // Prority Queue Problems section.
+
             //#problem:347 => Top K frequent elements
             
-            var pQueue = new PriorityQueue<Number>();
+            /*var pQueue = new PriorityQueue<Number>();
 
             var input = new int[] {6,0,1,4,9,7,-3,1,-4,-8,4,-7,-3,3,2,-3,9,5,-4,0};
             var valuePair = new Dictionary<int, int>();
@@ -58,7 +61,128 @@ namespace Coding_Problems
                 var item = pQueue.DeQueue();
                 Console.WriteLine(item.NumberValue);                
                 k--;
+            }*/
+
+            // problem 215
+            /*var input = new int[] {3,2,3,1,2,4,5,5,6};
+            int k = 4;
+
+            var priorityQueue = new PriorityQueue<Number>();
+
+            foreach(var i in input)
+            {
+                priorityQueue.Insert(new Number(i, i));
             }
+
+            int j = int.MinValue;
+            while(k > 0)
+            {
+                j = priorityQueue.DeQueue().NumberValue;
+                k--;
+            }*/
+
+            //problem 506.
+            /*var score = new int[]{10,3,8,9,4};
+            var priorityQueue = new PriorityQueue<Number>();
+
+            for(int i = 0; i< score.Length; i++)
+            {
+                priorityQueue.Insert(new Number(i, score[i]));
+            }
+
+            var output = new string[score.Length];
+            var j = 0;
+            while(j < score.Length)
+            {
+                var number = priorityQueue.DeQueue();
+                var num = number.NumberValue;
+                Console.WriteLine(number.Priority);
+                switch(j)
+                {
+                    case 0:
+                    output[num] = "Gold Medal";
+                    break;
+                    case 1:
+                    output[num] = "Silver Medal";
+                    break;
+                    case 2:
+                    output[num] = "Bronze Medal";
+                    break;
+                    default:
+                    output[num] = (j+1).ToString();
+                    break;
+                }
+                
+                j++;
+            }*/
+
+            // problem: 2099
+            var nums = new int[] {50, -75};
+            var output = new int[2];
+            var temp = new int[nums.Length];
+
+            var priorityQueue = new PriorityQueue<Number>();
+
+            for(int i = 0; i< nums.Length; i++)
+            {
+                priorityQueue.Insert(new Number(i, nums[i]));
+            }
+
+            for(int l = 0; l < temp.Length; l++)
+            {
+                temp[l] = int.MinValue;
+            }
+            int k = 2;
+
+            var j = 0;
+            while(k > 0)
+            {
+                var number1 = priorityQueue.DeQueue();
+                temp[number1.NumberValue] = number1.Priority;
+                k--;
+            }            
+            
+            foreach(var y in temp)
+            {
+                if(y != int.MinValue)
+                {
+                    output[j++] = y;
+                }
+            }
+
+            foreach(var x in output)
+            {
+                Console.WriteLine(x);
+            }
+
+            // problem: 373...pending
+            /*var num1 = new int[] {1, 1, 2};
+            var num2 = new int[] {1, 2, 3};
+            var minPriorityQueue = new MinPriorityQueue<NumberPair>();
+            int k = 10;
+
+            for(int i=0; i < num1.Length && i < k ; i++)
+            {
+                var pair = num1[i] +","+num2[0];
+                minPriorityQueue.Insert(new NumberPair(pair, num1[i]+num2[0]));
+            }
+
+            var resultList = new List<IList<int>>();
+            
+            while(k > 0 && minPriorityQueue.GetCount() > 0)
+            {
+                var pairResult = minPriorityQueue.DeQueue().Pair;
+                var pairArray = pairResult.Split(',');
+                var n1 = Convert.ToInt32(pairArray[0]);
+                resultList.Add(new List<int>{ Convert.ToInt32(pairArray[0]), Convert.ToInt32(pairArray[1])});                
+                var j = 0;
+                if(j < num2.Length)
+                {
+                    minPriorityQueue.Insert(new NumberPair(n1+","+num2[j+1], n1+num2[j+1]));
+                    //j++;
+                }
+                k--;
+            }*/
         }
 
         public static List<int> ReverseArray(List<int> arr)
