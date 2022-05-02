@@ -117,7 +117,7 @@ namespace Coding_Problems
             }*/
 
             // problem: 2099
-            var nums = new int[] {50, -75};
+            /*var nums = new int[] {50, -75};
             var output = new int[2];
             var temp = new int[nums.Length];
 
@@ -183,6 +183,26 @@ namespace Coding_Problems
                 }
                 k--;
             }*/
+
+                int n = 19;
+                int sum =0;
+
+                while(n >9)
+                {
+                    sum = 0;
+                    while(n > 0)
+                    {
+                        var r = n%10;
+                        sum += (r*r);
+                        n/=10;
+                    }
+                    n = sum;
+                }
+
+                if(n == 1)
+                {
+                    
+                }
         }
 
         public static List<int> ReverseArray(List<int> arr)
@@ -307,4 +327,145 @@ namespace Coding_Problems
           this.next = next;
       }
     }
+
+    public class MyHashMap {
+    
+    public LinkedList<Entry>[] table; 
+    public MyHashMap() {
+        table = new LinkedList<Entry>[100];
+    }
+    
+    public void Put(int key, int value) {
+        var newEntry = new Entry(key, value);
+
+        var index = this.GetIndex(key.GetHashCode());
+
+        var entry = this.SeekEntry(index, key);
+
+        if(entry == null)
+        {
+            if(this.table[index]==null)
+            {
+                this.table[index] = new LinkedList<Entry>();
+            }
+            this.table[index].AddLast(newEntry);
+        }
+        else
+        {
+            entry.Value = value;
+        }
+    }
+    
+    public int Get(int key) {
+        var index = this.GetIndex(key.GetHashCode());
+
+        var entry = this.SeekEntry(index, key);
+
+        if(entry != null)
+        {
+            return entry.Value;
+        }
+
+        return -1;
+    }
+    
+    public void Remove(int key) {
+        var index = this.GetIndex(key.GetHashCode());
+        
+        var entry = this.SeekEntry(index, key);
+
+        if(entry != null)
+        {
+            this.table[index].Remove(entry);
+        }        
+    }
+
+    public int GetIndex(int hashKey)
+    {
+        return hashKey%100;
+    }
+
+    public Entry SeekEntry(int index, int key)
+    {
+        var bucket = this.table[index];
+
+        if(bucket != null)
+        {
+            foreach(var entry in bucket)
+            {
+                if(entry.Key == key)
+                {
+                    return entry;
+                }
+            }
+        }
+
+        return null;
+    }
+}
+    public class Entry{
+
+        public Entry(int key, int value)
+        {
+            this.Key = key;
+            this.Value = value;
+            this.HashValue = this.Key.GetHashCode();
+        }
+        public int Key { get; set; }
+
+        public int Value { get; set; }
+
+        public int HashValue { get; set; }
+    }
+
+    public class MyHashSet {
+        public LinkedList<int>[] table;
+        public MyHashSet() {
+            this.table = new LinkedList<int>[100];
+        }
+        
+        public void Add(int key) {
+            if(!this.Contains(key))
+            {
+                var index = this.GetIndex(key);
+                
+                if(this.table[index] == null)
+                    this.table[index] = new LinkedList<int>();
+                
+                this.table[index].AddLast(key);
+            }
+        }
+        
+        public void Remove(int key) {
+            if(this.Contains(key))
+            {
+                var index = this.GetIndex(key);
+                
+                this.table[index].Remove(key);
+            }
+        }
+        
+        public bool Contains(int key) {
+            var index = this.GetIndex(key);
+            
+            if(this.table[index] != null)
+            {
+                foreach(var val in this.table[index])
+                {
+                    if(val == key)
+                    {
+                        return true;
+                    }
+                }
+            }            
+
+            return false;
+        }
+
+        public int GetIndex(int key)
+        {
+            return key.GetHashCode() % 100;
+        }
+    }
+
 }
