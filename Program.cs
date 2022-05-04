@@ -184,25 +184,46 @@ namespace Coding_Problems
                 k--;
             }*/
 
-                int n = 19;
-                int sum =0;
+            var hashMapProblems = new HashMapProblems();
 
-                while(n >9)
-                {
-                    sum = 0;
-                    while(n > 0)
-                    {
-                        var r = n%10;
-                        sum += (r*r);
-                        n/=10;
-                    }
-                    n = sum;
-                }
+            var str1 = new string[] {"Shogun","Tapioca Express","Burger King","KFC"};
+            var str2 = new string[] {"KFC","Shogun","Burger King"};
 
-                if(n == 1)
-                {
-                    
-                }
+            /*var board = new char[][]{new char[] {'5','3','.','.','7','.','.','.','.'},
+                                    new char[] {'6','.','.','1','9','5','.','.','.'},
+                                    new char[] {'.','9','8','.','.','.','.','6','.'},
+                                    new char[] {'8','.','.','.','6','.','.','.','3'},
+                                    new char[] {'4','.','.','8','.','3','.','.','1'},
+                                    new char[] {'7','.','.','.','2','.','.','.','6'},
+                                    new char[] {'.','6','.','.','.','.','2','8','.'},
+                                    new char[] {'.','.','.','4','1','9','.','.','5'},
+                                    new char[] {'.','.','.','.','8','.','.','7','9'}};*/
+            var board = new char[][]{ new char[]{'.','.','4','.','.','.','6','3','.'},
+                                    new char[] {'.','.','.','.','.','.','.','.','.'},
+                                    new char[] {'5','.','.','.','.','.','.','9','.'},
+                                    new char[] {'.','.','.','5','6','.','.','.','.'},
+                                    new char[] {'4','.','3','.','.','.','.','.','1'},
+                                    new char[] {'.','.','.','7','.','.','.','.','.'},
+                                    new char[] {'.','.','.','5','.','.','.','.','.'},
+                                    new char[] {'.','.','.','.','.','.','.','.','.'},
+                                    new char[] {'.','.','.','.','.','.','.','.','.'}};
+            //var output = hashMapProblems.GroupAnagrams(new string[]{ "hhhhu","tttti","tttit","hhhuh","hhuhh","tittt" });
+            //var output = hashMapProblems.IsValidSudoku(board);
+            //var sortString = hashMapProblems.QuickSorting("eat");
+
+            var t1 = new TreeNode();
+            var t2 = new TreeNode();
+            var t3 = new TreeNode();
+            t1.left = t2;
+            t1.right = t3;
+            var t4 = new TreeNode();
+            t2.left = t4;
+            var t5 = new TreeNode();
+            t3.right = t5;
+            var t6 = new TreeNode();
+            t5.right = t6;
+            var output = hashMapProblems.FindDuplicateSubtrees(t1);
+            Console.WriteLine(output);
         }
 
         public static List<int> ReverseArray(List<int> arr)
