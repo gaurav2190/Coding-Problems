@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Coding_Problems
@@ -236,6 +237,100 @@ namespace Coding_Problems
             }
 
             return s;
+        }
+
+        public int NumJewelsInStones(string jewels, string stones) {
+            var count = 0;
+            foreach(var stone in stones)
+            {
+                if(jewels.Contains(stone.ToString()))
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public int LengthOfLongestSubstring(string s) {
+            var charTable = new Dictionary<char,int>();
+            var str = new StringBuilder();
+            int l = 0;
+            var listNums = new List<int>();
+
+            for(int i =0; i< s.Length; i++)
+            {
+                if(str.ToString().Contains(s[i]))
+                {
+                    str.Clear();
+                    charTable[s[i]] = i;
+                    listNums.Add(l);
+                    l = 1;
+                    str.Append(s[i]);        
+                }
+                else
+                {
+                    l++;
+                    str.Append(s[i]);
+                    if(charTable.ContainsKey(s[i]))
+                    {
+                        charTable[s[i]] = i;
+                    }
+                    else
+                    {
+                        charTable.Add(s[i], i);
+                    }
+                }
+            }
+
+            return listNums.OrderByDescending(m => m).First();
+        }
+
+        public int FourSumNumbersCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4)
+        {
+            var sums12 = new int[(int)Math.Pow((double)nums1.Length, (double)2)];
+            var sums34 = new int[(int)Math.Pow((double)nums1.Length, (double)2)];
+            var sumTable = new Dictionary<int, int>();
+            int i, j, k = 0;
+            for(i = 0; i < nums1.Length; i++)
+            {
+                for(j = 0; j < nums1.Length; j++)
+                {
+                    sums12[k++] = nums1[i]+nums2[j];
+                }
+            }
+
+            k = 0;
+            for(i = 0; i < nums1.Length; i++)
+            {
+                for(j = 0; j < nums1.Length; j++)
+                {
+                    sums34[k++] = (nums3[i]+nums4[j]) * -1; // taking sum and negation.
+                }
+            }
+
+            for(i = 0; i< sums12.Length; i++)
+            {
+                if(sumTable.ContainsKey(sums12[i]))
+                {
+                    sumTable[sums12[i]]++;
+                }
+                else
+                {
+                    sumTable.Add(sums12[i], 1);
+                }
+            }
+
+            int count = 0;
+            for(i = 0; i< sums34.Length; i++)
+            {
+                if(sumTable.ContainsKey(sums34[i]))
+                {
+                    count += sumTable[sums34[i]];
+                }
+            }
+
+            return count;
         }
     }
 }
