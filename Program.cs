@@ -211,7 +211,7 @@ namespace Coding_Problems
             //var output = hashMapProblems.IsValidSudoku(board);
             //var sortString = hashMapProblems.QuickSorting("eat");
 
-            var t1 = new TreeNode();
+            /*var t1 = new TreeNode();
             var t2 = new TreeNode();
             var t3 = new TreeNode();
             t1.left = t2;
@@ -222,8 +222,23 @@ namespace Coding_Problems
             t3.right = t5;
             var t6 = new TreeNode();
             t5.right = t6;
-            var output = hashMapProblems.FindDuplicateSubtrees(t1);
-            Console.WriteLine(output);
+            var output = hashMapProblems.FindDuplicateSubtrees(t1);*/
+
+            var r = new RandomizedSet();
+            var result = r.Insert(1);
+            Console.WriteLine(result);
+            result = r.Remove(2);
+            Console.WriteLine(result);
+            result = r.Insert(2);
+            Console.WriteLine(result);
+            var result1 = r.GetRandom();
+            Console.WriteLine(result1);
+            result = r.Remove(1);
+            Console.WriteLine(result);
+            result = r.Insert(2);
+            Console.WriteLine(result);
+            result1 = r.GetRandom();
+            Console.WriteLine(result1);
         }
 
         public static List<int> ReverseArray(List<int> arr)

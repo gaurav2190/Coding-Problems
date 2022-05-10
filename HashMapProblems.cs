@@ -334,3 +334,79 @@ namespace Coding_Problems
         }
     }
 }
+
+public class RandomizedSet {
+    public int Capacity { get; set; } = 1000;
+
+    public int Size { get; set; } = 0;
+
+    public List<int> IndexList { get; set; } = new List<int>();
+    public LinkedList<int>[] Table;
+    public RandomizedSet() {
+        Table = new LinkedList<int>[this.Capacity];
+    }
+    
+    public bool Insert(int val) {
+        var index = this.GetIndex(val.GetHashCode());
+        
+        if(this.Table[index] != null)
+        {
+            var element = this.Table[index].Find(val);
+
+            if(element != null)
+            {            
+                return false;
+            }
+        }
+        else
+        {
+            this.Table[index] = new LinkedList<int>();
+        }
+
+        this.Table[index].AddLast(val);
+        if(!this.IndexList.Contains(index))
+        {
+            this.IndexList.Add(index);
+        }    
+        this.Size++;
+        return true;
+    }
+    
+    public bool Remove(int val) {
+        var index = this.GetIndex(val.GetHashCode());
+        
+        if(this.Table[index] != null)
+        {
+            var element = this.Table[index].Find(val);
+            if(element != null)
+            {
+                this.Table[index].Remove(val);
+                if(this.Table[index].Count == 0)
+                {
+                    this.IndexList.Remove(index);
+                }
+                this.Size--;
+                return true;
+            }            
+        }
+
+        return false;                        
+    }
+    
+    public int GetRandom() {
+        var random = new Random();
+        var item = default(int);
+        if(this.Size > 0)
+        {
+            var randomListIndex = random.Next(0, this.IndexList.Count);
+            item = Table[IndexList[randomListIndex]].FirstOrDefault();
+        }        
+
+        return item;
+    }
+
+    public int GetIndex(int key)
+    {
+        return (key & 0x7FFFFFFF) % this.Capacity;
+    }
+}
